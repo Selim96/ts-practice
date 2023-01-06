@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Selim96/ts-practice/issues"
   },
-  "homepage": "https://github.com/Selim96/ts-practice#readme"
+  "homepage": "https://github.com/Selim96/ts-practice#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
 }
