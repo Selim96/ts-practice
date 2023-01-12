@@ -99,27 +99,78 @@ add1 = (n1:number, n2: number) => {
 
 // console.log(mango,poly)
 
-type TAnimationState = "playing" | "paused";
-type THttpState = 'request' | 'success' | 'error';
+// type TAnimationState = "playing" | "paused";
+// type THttpState = 'request' | 'success' | 'error';
 
-const makeState = <S>(initialState: S) => {
-  let state = initialState;
+// class State<S> {
+//   private state;
 
-  const getState = () => {
-    return state;
-  }
-  const setState = (newState: S) => {
-    state = newState;
-  };
+//   constructor(initialState: S) {
+//     this.state = initialState;
+//   }
 
+//   getState = () => {
+//     return this.state;
+//   }
+//   setState (newState: S) {
+//     this.state = newState;
+//   };
+
+// }
+
+// const animationState = new State<TAnimationState>("playing");
+// animationState.setState("paused");
+
+// const httpState = new State<THttpState>("success");
+// httpState.setState("request");
+
+// 1)
+function getPromise(): Promise<Array<number | string>> {
+  return new Promise((resolve) => {
+    resolve(['Text', 50]);
+  });
+}
+
+getPromise ()
+.then((data) => {
+  console.log(data);
+});
+
+// 2)
+type AllType = {
+  name: string;
+  position: number;
+  color: string;
+  weight: number
+}
+
+function compare (top: Pick<AllType, 'color' | 'name'>, bottom: Pick<AllType, 'position' | 'weight'>): AllType {
   return {
-    getState,
-      setState
+    name: top.name,
+    color: top.color,
+    position: bottom.position,
+    weight: bottom.weight,
+  };
+}
+
+// 3)
+function merge <T extends object, Y extends object> (objA: T, objB: Y) {
+  return Object.assign(objA, objB);
+}
+
+// 4)
+interface IComponent {
+  title: string;
+}
+
+class Component<T> {
+  constructor (public props:T) {
+
   }
 }
 
-const animationState = makeState<TAnimationState>("playing");
-animationState.setState("paused");
-
-const httpState = makeState<THttpState>("success");
-httpState.setState("request");
+class Page extends Component<IComponent> {
+  pageInfo () {
+    console.log(this.props.title);
+  }
+}
