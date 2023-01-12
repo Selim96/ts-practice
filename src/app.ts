@@ -9,4 +9,117 @@ function add(num1: number, num2: number) {
 button.addEventListener("click", function() {
   console.log(add(+input1.value, +input2.value));
 });
+// ========================================================
 
+interface IHuman {
+  readonly name: string;
+  readonly age: number;
+
+  greet(): void;
+}
+
+interface IWarrior {
+  readonly level: number;
+  readonly healthPoint?: number;
+
+  warCry(phrase: string): void;
+}
+
+class Warrior implements IHuman, IWarrior {
+  constructor(public name: string, public age: number, public level:number) {}
+  greet(): void {
+    console.log("Hi, my name is " + this.name);
+  }
+  warCry(phrase: string): void {
+    this.greet();
+    console.log(phrase + "Let's battle!!");
+  }
+}
+
+const warrior = new Warrior("Sam", 28, 80);
+warrior.age = 30;
+console.log(warrior);
+warrior.warCry("AAAAAAA!!");
+
+
+type AddFunc = (n1: number, n2: number) => number;
+
+let add1: AddFunc;
+
+add1 = (n1:number, n2: number) => {
+  return n1 + n2;
+}
+// ===================================================
+// interface Person {
+//   name: string;
+//   [x: string]: string;
+// }
+
+// const user: Person = {
+//   name: 'Alex',
+//   gender: 'MAN',
+//   country: 'Ukraine',
+//   lang: 'ua'
+// }
+
+// interface IPerson  {
+//   firstName: string;
+//   lastName: string;
+// }
+
+// const addFullName = <T extends IPerson>(person: T) => {
+//   return {
+//     ...person,
+//     fullName: `${person.firstName} ${person.lastName}`,
+//   }
+// };
+
+// console.log(addFullName({
+//   firstName: 'Alex',
+//   lastName: 'Cat',
+//   age: 35
+// }))
+
+// interface IUser <T>{
+//   id: T;
+//   name: string;
+//   active: boolean;
+// }
+
+// const mango: IUser<number> = {
+//   id: 55,
+//   name: 'Max',
+//   active: true,
+// };
+// const poly: IUser<string> = {
+//   id: 'afesdfd',
+//   name: 'Max',
+//   active: true,
+// };
+
+// console.log(mango,poly)
+
+type TAnimationState = "playing" | "paused";
+type THttpState = 'request' | 'success' | 'error';
+
+const makeState = <S>(initialState: S) => {
+  let state = initialState;
+
+  const getState = () => {
+    return state;
+  }
+  const setState = (newState: S) => {
+    state = newState;
+  };
+
+  return {
+    getState,
+      setState
+  }
+}
+
+const animationState = makeState<TAnimationState>("playing");
+animationState.setState("paused");
+
+const httpState = makeState<THttpState>("success");
+httpState.setState("request");
